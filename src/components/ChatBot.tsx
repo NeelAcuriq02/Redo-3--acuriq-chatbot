@@ -11,7 +11,7 @@ export default function ChatBot() {
   const [loading, setLoading] = useState(false);
 
   const sendMessage = async () => {
-    if (!input.trim()) return;
+    if (!input.trim() || loading) return;
 
     const userMessage: Message = { role: 'user', content: input };
     const newMessages = [...messages, userMessage];
@@ -82,6 +82,7 @@ export default function ChatBot() {
           onKeyDown={handleKeyDown}
           placeholder="Type your message..."
           className="flex-1 p-2 border rounded-lg"
+          disabled={loading}
         />
         <button
           onClick={sendMessage}
